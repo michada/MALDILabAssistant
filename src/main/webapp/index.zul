@@ -1,6 +1,6 @@
 <zk>
 	<window title="Sign in" width="220px" border="normal"
-		viewModel="@id('user') @init('es.uvigo.ei.sing.gc.view.models.UserViewModel')">
+		viewModel="@id('user') @init('es.uvigo.ei.sing.mla.view.models.UserViewModel')">
 		<vlayout>
 			<label value="Login" />
 			<textbox hflex="true" />
