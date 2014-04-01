@@ -2,24 +2,58 @@ package es.uvigo.ei.sing.mla.view.models;
 
 import org.springframework.util.StringUtils;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.zk.ui.select.annotation.VariableResolver;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import es.uvigo.ei.sing.mla.model.entities.User;
 import es.uvigo.ei.sing.mla.services.UserService;
-import es.uvigo.ei.sing.mla.services.UserServiceImpl;
 
+@VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class UserViewModel {
+	@WireVariable
+	private UserService userService;
 
-	private UserService service;
+	private String signInUsername = "signInUsername";
+	private String signInPassword = "signInPassword";
 
-	private String signInUsername;
-	private String signInPassword;
+	private String signUpUsername = "signUpUsername";
+	private String signUpPassword = "signUpPassword";
+	
+	public String getSignInUsername() {
+		return signInUsername;
+	}
 
-	private String signUpUsername;
-	private String signUpPassword;
+	public void setSignInUsername(String signInUsername) {
+		this.signInUsername = signInUsername;
+	}
+
+	public String getSignInPassword() {
+		return signInPassword;
+	}
+
+	public void setSignInPassword(String signInPassword) {
+		this.signInPassword = signInPassword;
+	}
+
+	public String getSignUpUsername() {
+		return signUpUsername;
+	}
+
+	public void setSignUpUsername(String signUpUsername) {
+		this.signUpUsername = signUpUsername;
+	}
+
+	public String getSignUpPassword() {
+		return signUpPassword;
+	}
+
+	public void setSignUpPassword(String signUpPassword) {
+		this.signUpPassword = signUpPassword;
+	}
 
 	@Command
 	public void signIn() {
-		User user = service.getUser(this.signInUsername);
+		User user = userService.getUser(this.signInUsername);
 
 		if (user != null &&
 				user.getPassword().equals(this.signInPassword)) {
@@ -32,12 +66,12 @@ public class UserViewModel {
 
 	@Command
 	public void signUp() {
-		if (StringUtils.hasLength(this.signUpUsername)
-				&& StringUtils.hasLength(this.signUpPassword)) {
+		if (StringUtils.hasLength(this.signUpUsername) &&
+			StringUtils.hasLength(this.signUpPassword)) {
 
 			System.out.println("TE HAS REGISTRADO");
 
-			service.addUser(new User(signUpUsername, signUpPassword));
+			userService.addUser(new User(signUpUsername, signUpPassword));
 		} else {
 			System.out.println("CAMPOS VACÍOS");
 		}

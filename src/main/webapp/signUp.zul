@@ -1,15 +1,15 @@
 <zk>
-	<window title="Sign up" width="220px" border="normal"
+	<window apply="org.zkoss.bind.BindComposer"
+		title="Sign up" width="220px" border="normal"
 		viewModel="@id('user') @init('es.uvigo.ei.sing.mla.view.models.UserViewModel')">
 		<vlayout>
 			<label value="Username" />
 			<textbox value="@bind(user.signUpUsername)" hflex="true" />
 
 			<label value="Password" />
-			<textbox type="password" value="@bind(user.signUpPassword)"
-				hflex="true" />
+			<textbox type="password" value="@bind(user.signUpPassword)" hflex="true" />
 
-			<button label="Sign up" onClick="@Command('signUp')" />
+			<button label="Sign up" onClick="@command('signUp')" />
 
 			<hlayout>
 				<a label="Sign in" href="signIn.zul" />
