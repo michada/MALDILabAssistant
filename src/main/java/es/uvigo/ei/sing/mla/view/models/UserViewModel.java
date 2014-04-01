@@ -5,6 +5,7 @@ import org.zkoss.bind.annotation.Command;
 
 import es.uvigo.ei.sing.mla.model.entities.User;
 import es.uvigo.ei.sing.mla.services.UserService;
+import es.uvigo.ei.sing.mla.services.UserServiceImpl;
 
 public class UserViewModel {
 
