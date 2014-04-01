@@ -2,8 +2,10 @@ package es.uvigo.ei.sing.mla.view.models;
 
 import org.springframework.util.StringUtils;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.Messagebox;
 
 import es.uvigo.ei.sing.mla.model.entities.User;
 import es.uvigo.ei.sing.mla.services.UserService;
@@ -18,7 +20,7 @@ public class UserViewModel {
 
 	private String signUpUsername = "signUpUsername";
 	private String signUpPassword = "signUpPassword";
-	
+
 	public String getSignInUsername() {
 		return signInUsername;
 	}
@@ -55,25 +57,25 @@ public class UserViewModel {
 	public void signIn() {
 		User user = userService.getUser(this.signInUsername);
 
-		if (user != null &&
-				user.getPassword().equals(this.signInPassword)) {
-			
-			System.out.println("HAS INICIADO SESIÓN");
+		if (user != null && user.getPassword().equals(this.signInPassword)) {
+
+			Executions.getCurrent().sendRedirect("home.zul");
 		} else {
-			System.out.println("LOGIN NO VÁLIDO");
+			Messagebox.show("Wrong login / password");
 		}
 	}
 
 	@Command
 	public void signUp() {
-		if (StringUtils.hasLength(this.signUpUsername) &&
-			StringUtils.hasLength(this.signUpPassword)) {
-
-			System.out.println("TE HAS REGISTRADO");
+		if (StringUtils.hasLength(this.signUpUsername)
+				&& StringUtils.hasLength(this.signUpPassword)
+				&& userService.getUser(signUpUsername) == null) {
 
 			userService.addUser(new User(signUpUsername, signUpPassword));
+
+			Executions.getCurrent().sendRedirect("home.zul");
 		} else {
-			System.out.println("CAMPOS VACÍOS");
+			Messagebox.show("Sign Up fields cannot be empty");
 		}
 	}
 }

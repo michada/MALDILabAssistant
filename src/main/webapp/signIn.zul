@@ -10,7 +10,7 @@
 			<textbox type="password" value="@bind(user.signInPassword)"
 				hflex="true" />
 
-			<button label="Sign in" onClick="@Command('signIn')" />
+			<button label="Sign in" onClick="@command('signIn')" />
 
 			<hlayout>
 				<a label="Sign up" href="signUp.zul" />
