@@ -10,4 +10,9 @@
 	</preference>
 	-->
 	
+	<listener>
+		<description>Checks if there is a logged user. If doesn't redirects to index.zul.
+		</description>
+	    <listener-class>es.uvigo.ei.sing.mla.view.initiators.SecurityInitiator</listener-class>
+	</listener>
 </zk>

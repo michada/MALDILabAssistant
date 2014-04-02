@@ -3,6 +3,8 @@ package es.uvigo.ei.sing.mla.view.models;
 import org.springframework.util.StringUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
@@ -58,7 +60,9 @@ public class UserViewModel {
 		User user = userService.getUser(this.signInUsername);
 
 		if (user != null && user.getPassword().equals(this.signInPassword)) {
-
+			final Session session = Sessions.getCurrent();
+			session.setAttribute("user", user);
+			
 			Executions.getCurrent().sendRedirect("home.zul");
 		} else {
 			Messagebox.show("Wrong login / password");
@@ -68,10 +72,12 @@ public class UserViewModel {
 	@Command
 	public void signUp() {
 		if (StringUtils.hasLength(this.signUpUsername)
-				&& StringUtils.hasLength(this.signUpPassword)
-				&& userService.getUser(signUpUsername) == null) {
+			&& StringUtils.hasLength(this.signUpPassword)
+			&& userService.getUser(signUpUsername) == null) {
+			final User user = userService.addUser(new User(signUpUsername, signUpPassword));
 
-			userService.addUser(new User(signUpUsername, signUpPassword));
+			final Session session = Sessions.getCurrent();
+			session.setAttribute("user", user);
 
 			Executions.getCurrent().sendRedirect("home.zul");
 		} else {
