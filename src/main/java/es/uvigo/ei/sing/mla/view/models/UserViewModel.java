@@ -62,7 +62,7 @@ public class UserViewModel {
 		if (user != null && user.getPassword().equals(this.signInPassword)) {
 			final Session session = Sessions.getCurrent();
 			session.setAttribute("user", user);
-			
+
 			Executions.getCurrent().sendRedirect("home.zul");
 		} else {
 			Messagebox.show("Wrong login / password");
@@ -72,9 +72,11 @@ public class UserViewModel {
 	@Command
 	public void signUp() {
 		if (StringUtils.hasLength(this.signUpUsername)
-			&& StringUtils.hasLength(this.signUpPassword)
-			&& userService.getUser(signUpUsername) == null) {
-			final User user = userService.addUser(new User(signUpUsername, signUpPassword));
+				&& StringUtils.hasLength(this.signUpPassword)
+				&& userService.getUser(signUpUsername) == null) {
+
+			final User user = userService.addUser(new User(signUpUsername,
+					signUpPassword));
 
 			final Session session = Sessions.getCurrent();
 			session.setAttribute("user", user);

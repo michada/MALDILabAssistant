@@ -16,8 +16,6 @@ public class SecurityInitiator implements Initiator {
 	static {
 		IGNORE_PAGES.add("/index.zul");
 		IGNORE_PAGES.add("/signUp.zul");
-//		IGNORE_PAGES.add("/loginConfirmation.zul");
-//		IGNORE_PAGES.add("/passwordRecovery.zul");
 	}
 
 	@Override
@@ -26,7 +24,10 @@ public class SecurityInitiator implements Initiator {
 
 		if (requestPath.equals("/logout.zul")) {
 			final Session session = Sessions.getCurrent(false);
-			if (session != null) session.invalidate();
+			
+			if (session != null) {
+				session.invalidate();
+			}
 
 			Executions.sendRedirect("/index.zul");
 		} else 	if (!IGNORE_PAGES.contains(requestPath)) {

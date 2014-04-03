@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,7 +20,7 @@ import es.uvigo.ei.sing.mla.util.CellNameType;
 public class Experiment {
 	@Id
 	@GeneratedValue
-	private long id;
+	private long experimentId;
 
 	@Column(length = 32, nullable = false)
 	private String name;
@@ -31,18 +34,26 @@ public class Experiment {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
 	
-	private int plateHeight;
+	private int numRows;
 	
-	private int plateWidth;
+	private int numCols;
 	
-	private CellNameType horizontalName;
+	private CellNameType rowNameType;
 	
-	private CellNameType verticalName;
+	private CellNameType colNameType;
 	
-	@OneToMany
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "login")
+	private User user;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "experiment")
 	private List<Condition> conditions;
 
 	public Experiment() {
+	}
+
+	public long getExperimentId() {
+		return experimentId;
 	}
 
 	public String getName() {
@@ -61,24 +72,32 @@ public class Experiment {
 		return endDate;
 	}
 
-	public int getPlateHeight() {
-		return plateHeight;
+	public int getNumRows() {
+		return numRows;
 	}
 
-	public int getPlateWidth() {
-		return plateWidth;
+	public int getNumCols() {
+		return numCols;
 	}
 
-	public CellNameType getHorizontalName() {
-		return horizontalName;
+	public CellNameType getRowNameType() {
+		return rowNameType;
 	}
 
-	public CellNameType getVerticalName() {
-		return verticalName;
+	public CellNameType getColNameType() {
+		return colNameType;
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	public List<Condition> getConditions() {
 		return conditions;
+	}
+
+	public void setExperimentId(long experimentId) {
+		this.experimentId = experimentId;
 	}
 
 	public void setName(String name) {
@@ -97,20 +116,24 @@ public class Experiment {
 		this.endDate = endDate;
 	}
 
-	public void setPlateHeight(int plateHeight) {
-		this.plateHeight = plateHeight;
+	public void setNumRows(int numRows) {
+		this.numRows = numRows;
 	}
 
-	public void setPlateWidth(int plateWidth) {
-		this.plateWidth = plateWidth;
+	public void setNumCols(int numCols) {
+		this.numCols = numCols;
 	}
 
-	public void setHorizontalName(CellNameType horizontalName) {
-		this.horizontalName = horizontalName;
+	public void setRowNameType(CellNameType rowNameType) {
+		this.rowNameType = rowNameType;
 	}
 
-	public void setVerticalName(CellNameType verticalName) {
-		this.verticalName = verticalName;
+	public void setColNameType(CellNameType colNameType) {
+		this.colNameType = colNameType;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setConditions(List<Condition> conditions) {

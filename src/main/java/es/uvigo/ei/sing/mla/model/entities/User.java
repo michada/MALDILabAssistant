@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -16,7 +17,7 @@ public class User {
 	@Column(length = 64, nullable = false)
 	private String password;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Experiment> experiments;
 
 	public User() {

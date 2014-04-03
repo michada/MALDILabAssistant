@@ -1,16 +1,20 @@
 package es.uvigo.ei.sing.mla.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Replicate {
 	@Id
 	@GeneratedValue
-	private long id;
+	private long replicateId;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sampleId")
 	private Sample sample;
 	
 	private int col;
@@ -23,11 +27,15 @@ public class Replicate {
 		this.col = col;
 		this.row = row;
 	}
-	
+
+	public long getReplicateId() {
+		return replicateId;
+	}
+
 	public Sample getSample() {
 		return sample;
 	}
-	
+
 	public int getCol() {
 		return col;
 	}
@@ -36,15 +44,19 @@ public class Replicate {
 		return row;
 	}
 
+	public void setReplicateId(long replicateId) {
+		this.replicateId = replicateId;
+	}
+
+	public void setSample(Sample sample) {
+		this.sample = sample;
+	}
+
 	public void setCol(int col) {
 		this.col = col;
 	}
 
 	public void setRow(int row) {
 		this.row = row;
-	}
-	
-	public void setSample(Sample sample) {
-		this.sample = sample;
 	}
 }
