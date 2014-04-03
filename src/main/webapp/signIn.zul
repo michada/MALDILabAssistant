@@ -1,5 +1,5 @@
 <zk>
-	<window  apply="org.zkoss.bind.BindComposer"
+	<window apply="org.zkoss.bind.BindComposer"
 		title="Sign in" width="220px" border="normal"
 		viewModel="@id('user') @init('es.uvigo.ei.sing.mla.view.models.UserViewModel')">
 		<vlayout>

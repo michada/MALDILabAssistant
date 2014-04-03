@@ -15,11 +15,11 @@ public class UserViewModel {
 	@WireVariable
 	private UserService userService;
 
-	private String signInUsername = "signInUsername";
-	private String signInPassword = "signInPassword";
+	private String signInUsername = "prueba";
+	private String signInPassword = "prueba";
 
-	private String signUpUsername = "signUpUsername";
-	private String signUpPassword = "signUpPassword";
+	private String signUpUsername = "prueba";
+	private String signUpPassword = "prueba";
 
 	public String getSignInUsername() {
 		return signInUsername;

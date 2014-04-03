@@ -44,4 +44,76 @@ public class Experiment {
 
 	public Experiment() {
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public int getPlateHeight() {
+		return plateHeight;
+	}
+
+	public int getPlateWidth() {
+		return plateWidth;
+	}
+
+	public CellNameType getHorizontalName() {
+		return horizontalName;
+	}
+
+	public CellNameType getVerticalName() {
+		return verticalName;
+	}
+
+	public List<Condition> getConditions() {
+		return conditions;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setPlateHeight(int plateHeight) {
+		this.plateHeight = plateHeight;
+	}
+
+	public void setPlateWidth(int plateWidth) {
+		this.plateWidth = plateWidth;
+	}
+
+	public void setHorizontalName(CellNameType horizontalName) {
+		this.horizontalName = horizontalName;
+	}
+
+	public void setVerticalName(CellNameType verticalName) {
+		this.verticalName = verticalName;
+	}
+
+	public void setConditions(List<Condition> conditions) {
+		this.conditions = conditions;
+	}
 }

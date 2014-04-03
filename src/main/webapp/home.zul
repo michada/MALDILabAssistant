@@ -1,3 +1,16 @@
 <zk>
-	Home
+	<window apply="org.zkoss.bind.BindComposer" title="Experiments"
+		width="600px" border="normal"
+		viewModel="@id('experiment') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')">
+		<listbox id="box" width="100%">
+			<listhead>
+				<listheader label="Name" />
+				<listheader label="Description" />
+			</listhead>
+			<listitem>
+				<listcell label="ExampleName" />
+				<listcell label="ExampleDescription" />
+			</listitem>
+		</listbox>
+	</window>
 </zk>

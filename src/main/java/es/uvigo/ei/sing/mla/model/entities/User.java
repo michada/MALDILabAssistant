@@ -1,8 +1,11 @@
 package es.uvigo.ei.sing.mla.model.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -12,6 +15,9 @@ public class User {
 
 	@Column(length = 64, nullable = false)
 	private String password;
+
+	@OneToMany
+	private List<Experiment> experiments;
 
 	public User() {
 	}
@@ -29,11 +35,19 @@ public class User {
 		return password;
 	}
 
+	public List<Experiment> getExperiments() {
+		return experiments;
+	}
+
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void setExperiments(List<Experiment> experiments) {
+		this.experiments = experiments;
 	}
 }
