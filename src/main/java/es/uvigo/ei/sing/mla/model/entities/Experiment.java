@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +22,7 @@ import es.uvigo.ei.sing.mla.util.CellNameType;
 public class Experiment {
 	@Id
 	@GeneratedValue
-	private long experimentId;
+	private int id;
 
 	@Column(length = 32, nullable = false)
 	private String name;
@@ -38,8 +40,10 @@ public class Experiment {
 	
 	private int numCols;
 	
+	@Enumerated(EnumType.STRING)
 	private CellNameType rowNameType;
 	
+	@Enumerated(EnumType.STRING)
 	private CellNameType colNameType;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -47,13 +51,13 @@ public class Experiment {
 	private User user;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "experiment")
-	private List<Condition> conditions;
+	private List<ConditionGroup> conditions;
 
 	public Experiment() {
 	}
 
-	public long getExperimentId() {
-		return experimentId;
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -92,12 +96,12 @@ public class Experiment {
 		return user;
 	}
 
-	public List<Condition> getConditions() {
+	public List<ConditionGroup> getConditions() {
 		return conditions;
 	}
 
-	public void setExperimentId(long experimentId) {
-		this.experimentId = experimentId;
+	public void setExperimentId(int experimentId) {
+		this.id = experimentId;
 	}
 
 	public void setName(String name) {
@@ -136,7 +140,7 @@ public class Experiment {
 		this.user = user;
 	}
 
-	public void setConditions(List<Condition> conditions) {
+	public void setConditions(List<ConditionGroup> conditions) {
 		this.conditions = conditions;
 	}
 }

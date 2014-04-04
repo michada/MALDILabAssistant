@@ -1,16 +1,24 @@
 <zk>
 	<window apply="org.zkoss.bind.BindComposer" title="Experiments"
 		width="600px" border="normal"
-		viewModel="@id('experiment') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')">
-		<listbox id="box" width="100%">
-			<listhead>
-				<listheader label="Name" />
-				<listheader label="Description" />
-			</listhead>
-			<listitem>
-				<listcell label="ExampleName" />
-				<listcell label="ExampleDescription" />
-			</listitem>
-		</listbox>
+		viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.HomeViewModel')">
+		
+		<grid id="box" width="100%" model="@load(vm.experiments)" autopaging="true">
+			<columns>
+				<column label="Name"/>
+				<column label="Description"/>
+				<column label=""/>
+			</columns>
+			
+			<rows>
+				<template name="model" var="experiment">
+					<row>
+						<label value="@load(experiment.name)" />
+						<label value="@load(experiment.description)" />
+						<button label="Open" onClick="@command('edit', experiment=experiment)"/>
+					</row>
+				</template>
+			</rows>
+		</grid>
 	</window>
 </zk>

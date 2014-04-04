@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Replicate {
 	@Id
 	@GeneratedValue
-	private long replicateId;
+	private int id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sampleId")
@@ -28,8 +28,8 @@ public class Replicate {
 		this.row = row;
 	}
 
-	public long getReplicateId() {
-		return replicateId;
+	public int getId() {
+		return id;
 	}
 
 	public Sample getSample() {
@@ -44,8 +44,8 @@ public class Replicate {
 		return row;
 	}
 
-	public void setReplicateId(long replicateId) {
-		this.replicateId = replicateId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setSample(Sample sample) {

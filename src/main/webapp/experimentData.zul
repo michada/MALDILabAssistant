@@ -1,3 +1,7 @@
 <zk>
-	DATA
+	<window apply="org.zkoss.bind.BindComposer" title="Experiments"
+		width="600px" border="normal"
+		viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')">
+		<label value="@load(vm.experiment.name)"/>
+	</window>
 </zk>

@@ -6,25 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Condition {
+public class ConditionGroup {
 	@Id
 	@GeneratedValue
-	private long conditionId;
+	private int id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "experimentId")
 	private Experiment experiment;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "condition")
 	private List<Sample> samples;
 
-	public long getConditionId() {
-		return conditionId;
+	public int getId() {
+		return id;
 	}
 
 	public Experiment getExperiment() {
@@ -35,8 +33,8 @@ public class Condition {
 		return samples;
 	}
 
-	public void setConditionId(long conditionId) {
-		this.conditionId = conditionId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setExperiment(Experiment experiment) {

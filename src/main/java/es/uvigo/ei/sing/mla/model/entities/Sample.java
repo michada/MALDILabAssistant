@@ -14,20 +14,20 @@ import javax.persistence.OneToMany;
 public class Sample {
 	@Id
 	@GeneratedValue
-	private long sampleId;
+	private int id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "conditionId")
-	private Condition condition;
+	private ConditionGroup condition;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sample")
 	private List<Replicate> replicates;
 
-	public long getSampleId() {
-		return sampleId;
+	public int getId() {
+		return id;
 	}
 
-	public Condition getCondition() {
+	public ConditionGroup getCondition() {
 		return condition;
 	}
 
@@ -35,11 +35,11 @@ public class Sample {
 		return replicates;
 	}
 
-	public void setSampleId(long sampleId) {
-		this.sampleId = sampleId;
+	public void setId(int sampleId) {
+		this.id = sampleId;
 	}
 
-	public void setCondition(Condition condition) {
+	public void setCondition(ConditionGroup condition) {
 		this.condition = condition;
 	}
 
