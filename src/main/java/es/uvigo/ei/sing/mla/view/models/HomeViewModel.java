@@ -35,19 +35,19 @@ public class HomeViewModel {
 	}
 
 	@Command
-	public void editExperiment(
-			@BindingParam("experiment") Experiment experiment
-			) {
-		Executions.getCurrent().sendRedirect("experimentData.zul?id=" + experiment.getId());
+	public void editExperiment(@BindingParam("experiment") Experiment experiment) {
+		Executions.getCurrent().sendRedirect(
+				"experimentData.zul?id=" + experiment.getId());
 	}
 
 	@Command
 	public void addExperiment() {
 		final User user = (User) Sessions.getCurrent().getAttribute("user");
-		final Experiment experiment = this.experimentService.addExperiment(new Experiment());
 
-		experiment.setUser(user);
-
-		Executions.getCurrent().sendRedirect("experimentData.zul?id=" + experiment.getId());
+		Experiment experiment = this.experimentService.addExperiment(new Experiment());
+		this.experimentService.getExperiment(experiment.getId()).setUser(user);
+		
+		Executions.getCurrent().sendRedirect(
+				"experimentData.zul?id=" + experiment.getId());
 	}
 }
