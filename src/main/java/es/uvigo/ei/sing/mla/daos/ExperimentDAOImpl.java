@@ -23,11 +23,25 @@ public class ExperimentDAOImpl implements ExperimentDAO {
 
 		return experiment;
 	}
+	
+	@Override
+	@Transactional
+	public Experiment editExperiment(Experiment experiment) {
+		em.merge(experiment);
+
+		return experiment;
+	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Experiment getExperiment(int experimentId) {
 		return em.find(Experiment.class, experimentId);
+	}
+	
+	@Override
+	@Transactional
+	public void deleteExperiment(Experiment experiment) {
+		em.remove(experiment);
 	}
 
 	@Override

@@ -1,7 +1,17 @@
 <zk>
-	<window apply="org.zkoss.bind.BindComposer" title="Experiments"
+	<window apply="org.zkoss.bind.BindComposer" title="Experiment Data"
 		width="600px" border="normal"
 		viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')">
-		<label value="@load(vm.experiment.name)"/>
+
+		<textbox value="@bind(vm.experiment.name)" hflex="true" />
+		<textbox value="@bind(vm.experiment.description)" hflex="true" />
+		<textbox value="@bind(vm.experiment.startDate)" hflex="true" />
+		<textbox value="@bind(vm.experiment.endDate)" hflex="true" />
+		<textbox value="@bind(vm.experiment.numRows)" hflex="true" />
+		<textbox value="@bind(vm.experiment.numCols)" hflex="true" />
+		<textbox value="@bind(vm.experiment.rowNameType)" hflex="true" />
+		<textbox value="@bind(vm.experiment.colNameType)" hflex="true" />
+		
+		<button label="Save" onClick="@command('saveExperiment')" />
 	</window>
 </zk>

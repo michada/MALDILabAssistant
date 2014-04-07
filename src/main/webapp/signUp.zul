@@ -12,7 +12,7 @@
 			<button label="Sign up" onClick="@command('signUp')" />
 
 			<hlayout>
-				<a label="Sign in" href="signIn.zul" />
+				<a label="Sign in" href="index.zul" />
 			</hlayout>
 		</vlayout>
 	</window>

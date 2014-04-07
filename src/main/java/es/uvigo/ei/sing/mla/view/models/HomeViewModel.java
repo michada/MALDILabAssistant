@@ -21,7 +21,7 @@ public class HomeViewModel {
 
 	private User getUser() {
 		final Session session = Sessions.getCurrent(false);
-		
+
 		if (session != null && session.hasAttribute("user")) {
 			return (User) session.getAttribute("user");
 		} else {
@@ -29,38 +29,25 @@ public class HomeViewModel {
 			throw new IllegalStateException("Missing user in session");
 		}
 	}
-	
+
 	public List<Experiment> getExperiments() {
 		return this.experimentService.listExperiments(getUser());
 	}
-	
+
 	@Command
-	public void edit(
-		@BindingParam("experiment") Experiment experiment
-	) {
+	public void editExperiment(
+			@BindingParam("experiment") Experiment experiment
+			) {
 		Executions.getCurrent().sendRedirect("experimentData.zul?id=" + experiment.getId());
 	}
-	
+
 	@Command
 	public void addExperiment() {
-		final Session session = Sessions.getCurrent();
+		final User user = (User) Sessions.getCurrent().getAttribute("user");
+		final Experiment experiment = this.experimentService.addExperiment(new Experiment());
 
-		if (session.hasAttribute("user")) {
-			Executions.getCurrent().sendRedirect("experimentData.zul");
-		}
+		experiment.setUser(user);
+
+		Executions.getCurrent().sendRedirect("experimentData.zul?id=" + experiment.getId());
 	}
-
-//	@Command
-//	public void editExperiment() {
-//		final Session session = Sessions.getCurrent();
-//
-//		if (session.hasAttribute("user")) {
-//			Experiment experiment = experimentService
-//					.getExperiment(experimentId);
-//
-//			session.setAttribute("experiment", experiment);
-//
-//			Executions.getCurrent().sendRedirect("experimentData.zul");
-//		}
-//	}
 }

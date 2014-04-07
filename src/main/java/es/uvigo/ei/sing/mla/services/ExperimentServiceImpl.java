@@ -21,10 +21,20 @@ public class ExperimentServiceImpl implements ExperimentService {
 	public Experiment addExperiment(Experiment experiment) {
 		return dao.addExperiment(experiment);
 	}
+	
+	@Override
+	public Experiment editExperiment(Experiment experiment) {
+		return dao.editExperiment(experiment);
+	}
 
 	@Override
 	public Experiment getExperiment(int experimentId) {
 		return dao.getExperiment(experimentId);
+	}
+	
+	@Override
+	public void deleteExperiment(Experiment experiment) {
+		dao.deleteExperiment(experiment);
 	}
 
 	@Override

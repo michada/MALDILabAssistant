@@ -7,8 +7,12 @@ import es.uvigo.ei.sing.mla.model.entities.User;
 
 public interface ExperimentService {
 	public Experiment addExperiment(Experiment experiment);
+	
+	public Experiment editExperiment(Experiment experiment);
 
 	public Experiment getExperiment(int experimentId);
+	
+	public void deleteExperiment(Experiment experiment);
 
 	public List<Experiment> listExperiments(User user);
 }

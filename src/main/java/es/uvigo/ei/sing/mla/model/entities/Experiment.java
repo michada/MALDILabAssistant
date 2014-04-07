@@ -24,7 +24,7 @@ public class Experiment {
 	@GeneratedValue
 	private int id;
 
-	@Column(length = 32, nullable = false)
+	@Column(length = 32)
 	private String name;
 
 	@Column(length = 500)
