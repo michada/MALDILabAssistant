@@ -22,7 +22,7 @@ import es.uvigo.ei.sing.mla.util.CellNameType;
 public class Experiment {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 
 	@Column(length = 32)
 	private String name;
@@ -56,7 +56,7 @@ public class Experiment {
 	public Experiment() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -100,7 +100,7 @@ public class Experiment {
 		return conditions;
 	}
 
-	public void setExperimentId(int experimentId) {
+	public void setId(Integer experimentId) {
 		this.id = experimentId;
 	}
 

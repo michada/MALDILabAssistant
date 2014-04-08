@@ -2,16 +2,18 @@
 	<window apply="org.zkoss.bind.BindComposer" title="Experiment Data"
 		width="600px" border="normal"
 		viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')">
-
-		<textbox value="@bind(vm.experiment.name)" hflex="true" />
-		<textbox value="@bind(vm.experiment.description)" hflex="true" />
-		<textbox value="@bind(vm.experiment.startDate)" hflex="true" />
-		<textbox value="@bind(vm.experiment.endDate)" hflex="true" />
-		<textbox value="@bind(vm.experiment.numRows)" hflex="true" />
-		<textbox value="@bind(vm.experiment.numCols)" hflex="true" />
-		<textbox value="@bind(vm.experiment.rowNameType)" hflex="true" />
-		<textbox value="@bind(vm.experiment.colNameType)" hflex="true" />
-		
-		<button label="Save" onClick="@command('saveExperiment')" />
+		<vlayout>
+			<textbox value="@bind(vm.experiment.name)" hflex="true" />
+			<textbox value="@bind(vm.experiment.description)" hflex="true" />
+			<textbox value="@bind(vm.experiment.startDate)" hflex="true" />
+			<textbox value="@bind(vm.experiment.endDate)" hflex="true" />
+			<textbox value="@bind(vm.experiment.numRows)" hflex="true" />
+			<textbox value="@bind(vm.experiment.numCols)" hflex="true" />
+			<textbox value="@bind(vm.experiment.rowNameType)" hflex="true" />
+			<textbox value="@bind(vm.experiment.colNameType)" hflex="true" />
+			
+			<button label="Save" onClick="@command('saveExperiment')" />
+			<button label="Reset" onClick="@command('reset')"/>
+		</vlayout>
 	</window>
 </zk>

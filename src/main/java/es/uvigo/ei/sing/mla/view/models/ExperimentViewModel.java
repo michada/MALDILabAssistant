@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import es.uvigo.ei.sing.mla.model.entities.Experiment;
+import es.uvigo.ei.sing.mla.model.entities.User;
 import es.uvigo.ei.sing.mla.services.ExperimentService;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -30,15 +31,21 @@ public class ExperimentViewModel {
 		if (experimentId != null) {
 			final int id = Integer.parseInt(experimentId);
 
-			this.experiment = experimentService.getExperiment(id);
+			this.experiment = experimentService.get(id);
 		} else {
-			Executions.sendRedirect("home.zul");
+//			Executions.sendRedirect("home.zul");
+			this.experiment = new Experiment();
+			this.experiment.setUser((User) Sessions.getCurrent().getAttribute("user"));
 		}
 	}
 
 	@Command
 	public void saveExperiment() {
-		experimentService.editExperiment(experiment);
+		if (experiment.getId() == null) {
+			this.experiment = this.experimentService.add(this.experiment);
+		} else {
+			experimentService.saveChanges(experiment);
+		}
 	}
 
 	public Experiment getExperiment() {

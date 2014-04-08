@@ -18,7 +18,7 @@ public class ExperimentDAOImpl implements ExperimentDAO {
 
 	@Override
 	@Transactional
-	public Experiment addExperiment(Experiment experiment) {
+	public Experiment add(Experiment experiment) {
 		em.persist(experiment);
 
 		return experiment;
@@ -26,7 +26,7 @@ public class ExperimentDAOImpl implements ExperimentDAO {
 	
 	@Override
 	@Transactional
-	public Experiment editExperiment(Experiment experiment) {
+	public Experiment update(Experiment experiment) {
 		em.merge(experiment);
 
 		return experiment;
@@ -34,19 +34,19 @@ public class ExperimentDAOImpl implements ExperimentDAO {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Experiment getExperiment(int experimentId) {
+	public Experiment get(int experimentId) {
 		return em.find(Experiment.class, experimentId);
 	}
 	
 	@Override
 	@Transactional
-	public void deleteExperiment(Experiment experiment) {
+	public void delete(Experiment experiment) {
 		em.remove(experiment);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Experiment> listExperiments(User user) {
+	public List<Experiment> list(User user) {
 		return em.createQuery("FROM Experiment ex WHERE ex.user = :user", Experiment.class)
 			.setParameter("user", user)
 		.getResultList();

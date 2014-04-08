@@ -18,27 +18,27 @@ public class ExperimentServiceImpl implements ExperimentService {
 	ExperimentDAO dao;
 
 	@Override
-	public Experiment addExperiment(Experiment experiment) {
-		return dao.addExperiment(experiment);
+	public Experiment add(Experiment experiment) {
+		return dao.add(experiment);
 	}
 	
 	@Override
-	public Experiment editExperiment(Experiment experiment) {
-		return dao.editExperiment(experiment);
+	public Experiment saveChanges(Experiment experiment) {
+		return dao.update(experiment);
 	}
 
 	@Override
-	public Experiment getExperiment(int experimentId) {
-		return dao.getExperiment(experimentId);
+	public Experiment get(int experimentId) {
+		return dao.get(experimentId);
 	}
 	
 	@Override
-	public void deleteExperiment(Experiment experiment) {
-		dao.deleteExperiment(experiment);
+	public void delete(Experiment experiment) {
+		dao.delete(experiment);
 	}
 
 	@Override
-	public List<Experiment> listExperiments(User user) {
-		return dao.listExperiments(user);
+	public List<Experiment> list(User user) {
+		return dao.list(user);
 	}
 }

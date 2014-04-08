@@ -31,23 +31,29 @@ public class HomeViewModel {
 	}
 
 	public List<Experiment> getExperiments() {
-		return this.experimentService.listExperiments(getUser());
+		return this.experimentService.list(getUser());
 	}
 
 	@Command
 	public void editExperiment(
-			@BindingParam("experiment") Experiment experiment
-			) {
+		@BindingParam("experiment") Experiment experiment
+	) {
 		Executions.getCurrent().sendRedirect("experimentData.zul?id=" + experiment.getId());
 	}
 
 	@Command
 	public void addExperiment() {
-		final User user = (User) Sessions.getCurrent().getAttribute("user");
-		final Experiment experiment = this.experimentService.addExperiment(new Experiment());
+//		final User user = (User) Sessions.getCurrent().getAttribute("user");
+//		final Experiment experimentBean = new Experiment();
+//		experimentBean.setName("");
+//		experimentBean.setDescription("");
+//		experimentBean.setColNameType(CellNameType.NUMERICAL);
+//		experimentBean.setRowNameType(CellNameType.NUMERICAL);
+//		
+//		final Experiment experiment = this.experimentService.addExperiment(experimentBean);
+//
+//		experiment.setUser(user);
 
-		experiment.setUser(user);
-
-		Executions.getCurrent().sendRedirect("experimentData.zul?id=" + experiment.getId());
+		Executions.getCurrent().sendRedirect("experimentData.zul");
 	}
 }
