@@ -23,8 +23,8 @@ public class ExperimentServiceImpl implements ExperimentService {
 	}
 
 	@Override
-	public Experiment get(int experimentId) {
-		return dao.get(experimentId);
+	public Experiment get(Integer id) {
+		return dao.get(id);
 	}
 
 	@Override

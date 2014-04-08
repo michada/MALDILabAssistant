@@ -8,7 +8,7 @@ import es.uvigo.ei.sing.mla.model.entities.User;
 public interface ExperimentService {
 	public Experiment add(Experiment experiment);
 
-	public Experiment get(int experimentId);
+	public Experiment get(Integer id);
 
 	public Experiment update(Experiment experiment);
 

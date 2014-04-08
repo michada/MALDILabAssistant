@@ -2,6 +2,7 @@ package es.uvigo.ei.sing.mla.model.entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,10 @@ import javax.persistence.OneToMany;
 public class ConditionGroup {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
+
+	@Column(length = 32)
+	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Experiment experiment;
@@ -21,8 +25,12 @@ public class ConditionGroup {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "condition")
 	private List<Sample> samples;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public Experiment getExperiment() {
@@ -33,8 +41,12 @@ public class ConditionGroup {
 		return samples;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setExperiment(Experiment experiment) {

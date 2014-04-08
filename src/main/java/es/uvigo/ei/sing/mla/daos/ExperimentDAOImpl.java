@@ -26,8 +26,8 @@ public class ExperimentDAOImpl implements ExperimentDAO {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Experiment get(int experimentId) {
-		return em.find(Experiment.class, experimentId);
+	public Experiment get(Integer id) {
+		return em.find(Experiment.class, id);
 	}
 
 	@Override

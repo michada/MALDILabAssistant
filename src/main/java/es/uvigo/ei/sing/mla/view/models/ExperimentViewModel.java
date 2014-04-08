@@ -1,5 +1,7 @@
 package es.uvigo.ei.sing.mla.view.models;
 
+import java.util.List;
+
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Executions;
@@ -40,12 +42,21 @@ public class ExperimentViewModel {
 	}
 
 	@Command
-	public void saveExperiment() {
+	public void save() {
 		if (experiment.getId() == null) {
 			this.experiment = this.experimentService.add(this.experiment);
 		} else {
 			experimentService.update(experiment);
 		}
+	}
+	
+	@Command
+	public void reset() {
+//		if (experiment.getId() == null) {
+//			this.experiment = new Experiment();
+//		} else {
+//			this.experiment = experimentService.get(this.experiment.getId());
+//		}
 	}
 
 	public Experiment getExperiment() {

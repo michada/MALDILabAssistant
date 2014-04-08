@@ -17,11 +17,11 @@
 						<label value="@load(experiment.name)" />
 						<label value="@load(experiment.description)" />
 						<button label="Open"
-							onClick="@command('editExperiment', experiment=experiment)" />
+							onClick="@command('edit', experiment=experiment)" />
 					</row>
 				</template>
 			</rows>
 		</grid>
-		<button label="New Experiment" onClick="@command('addExperiment')" />
+		<button label="New Experiment" onClick="@command('add')" />
 	</window>
 </zk>
