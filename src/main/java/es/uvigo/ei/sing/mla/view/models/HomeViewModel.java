@@ -43,17 +43,6 @@ public class HomeViewModel {
 
 	@Command
 	public void addExperiment() {
-//		final User user = (User) Sessions.getCurrent().getAttribute("user");
-//		final Experiment experimentBean = new Experiment();
-//		experimentBean.setName("");
-//		experimentBean.setDescription("");
-//		experimentBean.setColNameType(CellNameType.NUMERICAL);
-//		experimentBean.setRowNameType(CellNameType.NUMERICAL);
-//		
-//		final Experiment experiment = this.experimentService.addExperiment(experimentBean);
-//
-//		experiment.setUser(user);
-
 		Executions.getCurrent().sendRedirect("experimentData.zul");
 	}
 }
