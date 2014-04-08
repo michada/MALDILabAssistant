@@ -14,14 +14,14 @@ public class UserDAOImpl implements UserDAO {
 	private EntityManager em;
 
 	@Transactional
-	public User addUser(User user) {
+	public User add(User user) {
 		em.persist(user);
 
 		return user;
 	}
 
 	@Transactional(readOnly = true)
-	public User getUser(String login) {
+	public User get(String login) {
 		return em.find(User.class, login);
 	}
 }

@@ -1,5 +1,6 @@
 package es.uvigo.ei.sing.mla.model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,13 +16,21 @@ public class Sample {
 	@Id
 	@GeneratedValue
 	private int id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "conditionId")
+	@JoinColumn(name = "conditionId")
 	private ConditionGroup condition;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sample")
 	private List<Replicate> replicates;
+
+	public Sample() {
+	}
+
+	public Sample(ConditionGroup condition) {
+		this.condition = condition;
+		this.replicates = new ArrayList<Replicate>();
+	}
 
 	public int getId() {
 		return id;
@@ -35,8 +44,8 @@ public class Sample {
 		return replicates;
 	}
 
-	public void setId(int sampleId) {
-		this.id = sampleId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setCondition(ConditionGroup condition) {

@@ -15,12 +15,12 @@ public class UserServiceImpl implements UserService {
 	UserDAO dao;
 
 	@Override
-	public User addUser(User user) {
-		return dao.addUser(user);
+	public User add(User user) {
+		return dao.add(user);
 	}
 
 	@Override
-	public User getUser(String login) {
-		return dao.getUser(login);
+	public User get(String login) {
+		return dao.get(login);
 	}
 }

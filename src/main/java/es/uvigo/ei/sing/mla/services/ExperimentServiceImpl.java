@@ -21,17 +21,17 @@ public class ExperimentServiceImpl implements ExperimentService {
 	public Experiment add(Experiment experiment) {
 		return dao.add(experiment);
 	}
-	
-	@Override
-	public Experiment saveChanges(Experiment experiment) {
-		return dao.update(experiment);
-	}
 
 	@Override
 	public Experiment get(int experimentId) {
 		return dao.get(experimentId);
 	}
-	
+
+	@Override
+	public Experiment update(Experiment experiment) {
+		return dao.update(experiment);
+	}
+
 	@Override
 	public void delete(Experiment experiment) {
 		dao.delete(experiment);

@@ -33,9 +33,9 @@ public class ExperimentViewModel {
 
 			this.experiment = experimentService.get(id);
 		} else {
-//			Executions.sendRedirect("home.zul");
 			this.experiment = new Experiment();
-			this.experiment.setUser((User) Sessions.getCurrent().getAttribute("user"));
+			this.experiment.setUser((User) Sessions.getCurrent().getAttribute(
+					"user"));
 		}
 	}
 
@@ -44,7 +44,7 @@ public class ExperimentViewModel {
 		if (experiment.getId() == null) {
 			this.experiment = this.experimentService.add(this.experiment);
 		} else {
-			experimentService.saveChanges(experiment);
+			experimentService.update(experiment);
 		}
 	}
 

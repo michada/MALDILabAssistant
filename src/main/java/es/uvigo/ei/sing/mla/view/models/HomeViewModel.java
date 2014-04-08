@@ -35,10 +35,9 @@ public class HomeViewModel {
 	}
 
 	@Command
-	public void editExperiment(
-		@BindingParam("experiment") Experiment experiment
-	) {
-		Executions.getCurrent().sendRedirect("experimentData.zul?id=" + experiment.getId());
+	public void editExperiment(@BindingParam("experiment") Experiment experiment) {
+		Executions.getCurrent().sendRedirect(
+				"experimentData.zul?id=" + experiment.getId());
 	}
 
 	@Command

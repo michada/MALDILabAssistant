@@ -1,5 +1,6 @@
 package es.uvigo.ei.sing.mla.model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -26,6 +27,7 @@ public class User {
 	public User(String login, String password) {
 		this.login = login;
 		this.password = password;
+		this.experiments = new ArrayList<Experiment>();
 	}
 
 	public String getLogin() {

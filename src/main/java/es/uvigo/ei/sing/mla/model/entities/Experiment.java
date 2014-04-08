@@ -1,5 +1,6 @@
 package es.uvigo.ei.sing.mla.model.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,25 +36,35 @@ public class Experiment {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
-	
+
 	private int numRows;
-	
+
 	private int numCols;
-	
+
 	@Enumerated(EnumType.STRING)
 	private CellNameType rowNameType;
-	
+
 	@Enumerated(EnumType.STRING)
 	private CellNameType colNameType;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "login")
+	@JoinColumn(name = "login")
 	private User user;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "experiment")
 	private List<ConditionGroup> conditions;
 
 	public Experiment() {
+		this.name = "";
+		this.description = "";
+		this.startDate = new Date();
+		this.endDate = new Date();
+		this.numRows = 10;
+		this.numCols = 10;
+		this.rowNameType = CellNameType.UPPERCASE;
+		this.colNameType = CellNameType.NUMERICAL;
+		this.user = new User();
+		this.conditions = new ArrayList<ConditionGroup>();
 	}
 
 	public Integer getId() {
@@ -100,8 +111,8 @@ public class Experiment {
 		return conditions;
 	}
 
-	public void setId(Integer experimentId) {
-		this.id = experimentId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setName(String name) {

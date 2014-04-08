@@ -9,9 +9,9 @@ public interface ExperimentDAO {
 	public Experiment add(Experiment experiment);
 
 	public Experiment get(int experimentId);
-	
+
 	public Experiment update(Experiment experiment);
-	
+
 	public void delete(Experiment experiment);
 
 	public List<Experiment> list(User user);

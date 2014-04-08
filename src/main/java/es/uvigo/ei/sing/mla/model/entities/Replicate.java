@@ -12,11 +12,11 @@ public class Replicate {
 	@Id
 	@GeneratedValue
 	private int id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sampleId")
+	@JoinColumn(name = "sampleId")
 	private Sample sample;
-	
+
 	private int col;
 	private int row;
 

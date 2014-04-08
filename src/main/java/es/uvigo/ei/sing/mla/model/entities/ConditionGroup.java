@@ -14,7 +14,7 @@ public class ConditionGroup {
 	@Id
 	@GeneratedValue
 	private int id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Experiment experiment;
 

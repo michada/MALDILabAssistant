@@ -57,7 +57,7 @@ public class UserViewModel {
 
 	@Command
 	public void signIn() {
-		User user = userService.getUser(this.signInUsername);
+		User user = userService.get(this.signInUsername);
 
 		if (user != null && user.getPassword().equals(this.signInPassword)) {
 			final Session session = Sessions.getCurrent();
@@ -74,18 +74,18 @@ public class UserViewModel {
 		if (StringUtils.hasLength(this.signUpUsername)
 				&& StringUtils.hasLength(this.signUpPassword)) {
 
-			if(userService.getUser(signUpUsername) == null) {
-				
-				final User user = userService.addUser(new User(signUpUsername,
+			if (userService.get(signUpUsername) == null) {
+
+				final User user = userService.add(new User(signUpUsername,
 						signUpPassword));
-	
+
 				final Session session = Sessions.getCurrent();
 				session.setAttribute("user", user);
-	
+
 				Executions.getCurrent().sendRedirect("home.zul");
 			} else {
 				Messagebox.show("Username already in use");
-		}
+			}
 		} else {
 			Messagebox.show("Sign Up fields cannot be empty");
 		}
