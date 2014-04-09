@@ -11,7 +11,7 @@ import es.uvigo.ei.sing.mla.daos.ReplicateDAO;
 import es.uvigo.ei.sing.mla.model.entities.Replicate;
 import es.uvigo.ei.sing.mla.model.entities.Sample;
 
-@Service("sampleService")
+@Service("replicateService")
 @Scope(value = "singleton", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ReplicateServiceImpl implements ReplicateService {
 	@Autowired

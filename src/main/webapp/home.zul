@@ -5,6 +5,7 @@
 
 		<grid id="box" width="100%" model="@load(vm.experiments)"
 			autopaging="true">
+			
 			<columns>
 				<column label="Name" />
 				<column label="Description" />
