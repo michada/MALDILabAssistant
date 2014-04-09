@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.uvigo.ei.sing.mla.model.entities.ConditionGroup;
 import es.uvigo.ei.sing.mla.model.entities.Sample;
 
+@Repository
 public class SampleDAOImpl implements SampleDAO {
 	@PersistenceContext
 	private EntityManager em;

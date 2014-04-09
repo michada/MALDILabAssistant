@@ -82,15 +82,15 @@ public class ExperimentViewModel {
 		return experiment;
 	}
 
-	public List<ConditionGroup> listConditions() {
-		return this.conditionGroupService.list(this.condition.getExperiment());
+	public List<ConditionGroup> getConditions() {
+		return this.conditionGroupService.list(getExperiment());
 	}
 
-	public List<Sample> listSamples() {
+	public List<Sample> getSamples() {
 		return this.sampleService.list(this.sample.getCondition());
 	}
 
-	public List<Replicate> listReplicates() {
+	public List<Replicate> getReplicates() {
 		return this.replicateService.list(this.replicate.getSample());
 	}
 
@@ -98,7 +98,7 @@ public class ExperimentViewModel {
 		ConditionGroup condition = new ConditionGroup();
 
 		condition.setName("Condition"
-				+ Integer.toString(this.listConditions().size() + 1));
+				+ Integer.toString(this.getConditions().size() + 1));
 
 		condition.setExperiment(this.experiment);
 		condition.setSamples(new ArrayList<Sample>());
