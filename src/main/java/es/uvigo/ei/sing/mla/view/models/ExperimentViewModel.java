@@ -1,6 +1,5 @@
 package es.uvigo.ei.sing.mla.view.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.zkoss.bind.annotation.Command;
@@ -82,18 +81,31 @@ public class ExperimentViewModel {
 		return experiment;
 	}
 
+	public ConditionGroup getCondition() {
+		return condition;
+	}
+
+	public Sample getSample() {
+		return sample;
+	}
+
+	public Replicate getReplicate() {
+		return replicate;
+	}
+
 	public List<ConditionGroup> getConditions() {
-		return this.conditionGroupService.list(getExperiment());
+		return this.conditionGroupService.list(this.getExperiment());
 	}
 
 	public List<Sample> getSamples() {
-		return this.sampleService.list(this.sample.getCondition());
+		return this.sampleService.list(this.getCondition());
 	}
 
 	public List<Replicate> getReplicates() {
-		return this.replicateService.list(this.replicate.getSample());
+		return this.replicateService.list(this.getSample());
 	}
 
+	@Command
 	public void addCondition() {
 		ConditionGroup condition = new ConditionGroup();
 
@@ -101,8 +113,31 @@ public class ExperimentViewModel {
 				+ Integer.toString(this.getConditions().size() + 1));
 
 		condition.setExperiment(this.experiment);
-		condition.setSamples(new ArrayList<Sample>());
 
 		this.conditionGroupService.add(condition);
+	}
+
+	@Command
+	public void addSample() {
+		Sample sample = new Sample();
+
+		sample.setName("Sample"
+				+ Integer.toString(this.getSamples().size() + 1));
+
+		sample.setCondition(this.condition);
+
+		this.sampleService.add(sample);
+	}
+
+	@Command
+	public void addReplicate() {
+		Replicate replicate = new Replicate();
+
+		replicate.setName("Replicate"
+				+ Integer.toString(this.getReplicates().size() + 1));
+
+		replicate.setSample(this.sample);
+
+		this.replicateService.add(replicate);
 	}
 }

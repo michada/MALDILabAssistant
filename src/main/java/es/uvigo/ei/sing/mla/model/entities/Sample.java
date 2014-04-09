@@ -29,10 +29,8 @@ public class Sample {
 	private List<Replicate> replicates;
 
 	public Sample() {
-	}
-
-	public Sample(ConditionGroup condition) {
-		this.condition = condition;
+		this.name = "";
+		this.condition = new ConditionGroup();
 		this.replicates = new ArrayList<Replicate>();
 	}
 

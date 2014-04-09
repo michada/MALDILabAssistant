@@ -1,5 +1,6 @@
 package es.uvigo.ei.sing.mla.model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,6 +25,12 @@ public class ConditionGroup {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "condition")
 	private List<Sample> samples;
+
+	public ConditionGroup() {
+		this.name = "";
+		this.experiment = new Experiment();
+		this.samples = new ArrayList<Sample>();
+	}
 
 	public Integer getId() {
 		return id;

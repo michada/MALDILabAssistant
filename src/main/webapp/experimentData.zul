@@ -27,8 +27,7 @@
 			<label value="Type of column" />
 			<textbox value="@bind(vm.experiment.colNameType)" hflex="true" />
 
-			<grid id="box" width="100%" model="@load(vm.conditions)"
-				autopaging="true">
+			<grid id="conditionGrid" width="100%" model="@load(vm.conditions)">
 
 				<columns>
 					<column width="40px">
@@ -41,7 +40,43 @@
 					<template name="model" var="condition">
 						<row>
 							<detail open="false" fulfill="onOpen">
-								<grid></grid>
+								<grid id="sampleGrid" width="100%" model="@load(vm.samples)">
+
+									<columns>
+										<column width="40px">
+											<button label="+" width="30px" onClick="@command('addSample')" />
+										</column>
+										<column label="Samples" />
+									</columns>
+
+									<rows>
+										<template name="model" var="sample">
+											<row>
+												<detail open="false" fulfill="onOpen">
+													<grid id="replicateGrid" width="100%" model="@load(vm.replicates)">
+
+														<columns>
+															<column width="40px">
+																<button label="+" width="30px"
+																	onClick="@command('addReplicate')" />
+															</column>
+															<column label="Replicates" />
+														</columns>
+
+														<rows>
+															<template name="model" var="replicate">
+																<row>
+																	<label value="@bind(replicate.name)" />
+																</row>
+															</template>
+														</rows>
+													</grid>
+												</detail>
+												<label value="@bind(sample.name)" />
+											</row>
+										</template>
+									</rows>
+								</grid>
 							</detail>
 							<label value="@bind(condition.name)" />
 						</row>

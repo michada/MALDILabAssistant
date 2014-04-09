@@ -25,11 +25,8 @@ public class Replicate {
 	private Sample sample;
 
 	public Replicate() {
-	}
-
-	public Replicate(int col, int row) {
-		this.col = col;
-		this.row = row;
+		this.name = "";
+		this.sample = new Sample();
 	}
 
 	public Integer getId() {
