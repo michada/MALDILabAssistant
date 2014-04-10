@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import es.uvigo.ei.sing.mla.model.entities.User;
 
 @Repository
 public class ExperimentDAOImpl implements ExperimentDAO {
-	@PersistenceContext
+	@PersistenceContext(type = PersistenceContextType.EXTENDED)
 	private EntityManager em;
 
 	@Override
@@ -47,9 +48,15 @@ public class ExperimentDAOImpl implements ExperimentDAO {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Experiment> list(User user) {
-		return em
-				.createQuery("FROM Experiment ex WHERE ex.user = :user",
-						Experiment.class).setParameter("user", user)
-				.getResultList();
+		return em.createQuery("FROM Experiment ex WHERE ex.user = :user", Experiment.class)
+			.setParameter("user", user)
+		.getResultList();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Experiment reload(Experiment experiment) {
+		em.detach(experiment);
+		return this.get(experiment.getId());
 	}
 }

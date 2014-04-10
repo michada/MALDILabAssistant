@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import es.uvigo.ei.sing.mla.model.entities.Sample;
 
 @Repository
 public class ReplicateDAOImpl implements ReplicateDAO {
-	@PersistenceContext
+	@PersistenceContext(type = PersistenceContextType.EXTENDED)
 	private EntityManager em;
 
 	@Override
@@ -51,5 +52,12 @@ public class ReplicateDAOImpl implements ReplicateDAO {
 				.createQuery("FROM Replicate ex WHERE ex.sample = :sample",
 						Replicate.class).setParameter("sample", sample)
 				.getResultList();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Replicate reload(Replicate replicate) {
+		em.detach(replicate);
+		return this.get(replicate.getId());
 	}
 }

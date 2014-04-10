@@ -15,4 +15,6 @@ public interface ExperimentDAO {
 	public void delete(Experiment experiment);
 
 	public List<Experiment> list(User user);
+
+	public Experiment reload(Experiment experiment);
 }

@@ -9,6 +9,8 @@ public interface ReplicateDAO {
 	public Replicate add(Replicate replicate);
 
 	public Replicate get(Integer id);
+	
+	public Replicate reload(Replicate replicate);
 
 	public Replicate update(Replicate replicate);
 

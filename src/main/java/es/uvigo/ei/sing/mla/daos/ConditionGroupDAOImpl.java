@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import es.uvigo.ei.sing.mla.model.entities.Experiment;
 
 @Repository
 public class ConditionGroupDAOImpl implements ConditionGroupDAO {
-	@PersistenceContext
+	@PersistenceContext(type = PersistenceContextType.EXTENDED)
 	private EntityManager em;
 
 	@Override
@@ -52,5 +53,12 @@ public class ConditionGroupDAOImpl implements ConditionGroupDAO {
 						"FROM ConditionGroup ex WHERE ex.experiment = :experiment",
 						ConditionGroup.class)
 				.setParameter("experiment", experiment).getResultList();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public ConditionGroup reload(ConditionGroup condition) {
+		em.detach(condition);
+		return this.get(condition.getId());
 	}
 }

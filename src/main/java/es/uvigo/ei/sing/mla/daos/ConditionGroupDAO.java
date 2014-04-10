@@ -9,6 +9,8 @@ public interface ConditionGroupDAO {
 	public ConditionGroup add(ConditionGroup condition);
 
 	public ConditionGroup get(Integer id);
+	
+	public ConditionGroup reload(ConditionGroup condition);
 
 	public ConditionGroup update(ConditionGroup condition);
 

@@ -9,6 +9,8 @@ public interface SampleDAO {
 	public Sample add(Sample sample);
 
 	public Sample get(Integer id);
+	
+	public Sample reload(Sample sample);
 
 	public Sample update(Sample sample);
 
