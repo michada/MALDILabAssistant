@@ -26,46 +26,54 @@ public class Replicate {
 
 	public Replicate() {
 		this.name = "";
-		this.sample = new Sample();
+		this.sample = null;
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public int getCol() {
-		return col;
-	}
-
-	public int getRow() {
-		return row;
-	}
-
-	public Sample getSample() {
-		return sample;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	public int getCol() {
+		return col;
+	}
+
 	public void setCol(int col) {
 		this.col = col;
+	}
+
+	public int getRow() {
+		return row;
 	}
 
 	public void setRow(int row) {
 		this.row = row;
 	}
+	
+	public Sample getSample() {
+		return this.sample;
+	}
 
 	public void setSample(Sample sample) {
+		if (this.sample != null) {
+			this.sample._removeReplicate(this);
+		}
+
 		this.sample = sample;
+
+		if (this.sample != null) {
+			this.sample._addReplicate(this);
+		}
 	}
 }
