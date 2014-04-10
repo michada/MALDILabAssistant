@@ -41,4 +41,9 @@ public class ExperimentServiceImpl implements ExperimentService {
 	public List<Experiment> list(User user) {
 		return dao.list(user);
 	}
+	
+	@Override
+	public Experiment reload(Experiment experiment) {
+		return dao.reload(experiment);
+	}
 }

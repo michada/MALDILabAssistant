@@ -1,7 +1,8 @@
 <zk>
 	<window apply="org.zkoss.bind.BindComposer" title="Experiment Data"
 		width="1000px" border="normal"
-		viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')">
+		viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')"
+		onClose="@command('cancelChanges')">
 		<vlayout>
 			<label value="Name" />
 			<textbox value="@bind(vm.experiment.name)" hflex="true" />
@@ -9,17 +10,21 @@
 			<label value="Description" />
 			<textbox value="@bind(vm.experiment.description)" hflex="true" />
 
-			<label value="Start Date" />
-			<textbox value="@bind(vm.experiment.startDate)" hflex="true" />
+			<hlayout hflex="true">
+				<label value="Start Date" />
+				<datebox value="@bind(vm.experiment.startDate)"/>
+	
+				<label value="End Date" />
+				<datebox value="@bind(vm.experiment.endDate)"/>
+			</hlayout>
 
-			<label value="End Date" />
-			<textbox value="@bind(vm.experiment.endDate)" hflex="true" />
-
-			<label value="Number of rows" />
-			<textbox value="@bind(vm.experiment.numRows)" hflex="true" />
-
-			<label value="Number of columns" />
-			<textbox value="@bind(vm.experiment.numCols)" hflex="true" />
+			<hlayout hflex="true">
+				<label value="Number of rows" />
+				<intbox value="@bind(vm.experiment.numRows)"/>
+	
+				<label value="Number of columns" />
+				<intbox value="@bind(vm.experiment.numCols)"/>
+			</hlayout>
 
 			<label value="Type of row" />
 			<textbox value="@bind(vm.experiment.rowNameType)" hflex="true" />
@@ -27,8 +32,7 @@
 			<label value="Type of column" />
 			<textbox value="@bind(vm.experiment.colNameType)" hflex="true" />
 
-			<grid id="conditionGrid" width="100%" model="@load(vm.conditions)">
-
+			<grid width="100%" model="@load(vm.model)">
 				<columns>
 					<column width="40px">
 						<button label="+" width="30px" onClick="@command('addCondition')" />
@@ -39,12 +43,13 @@
 				<rows>
 					<template name="model" var="condition">
 						<row>
-							<detail open="false" fulfill="onOpen">
-								<grid id="sampleGrid" width="100%" model="@load(vm.samples)">
+							<textbox inplace="true" hflex="true" value="@bind(condition.condition.name)" />
+							<detail open="false" fulfill="onOpen" >
+								<grid hflex="true" model="@load(condition)">
 
 									<columns>
 										<column width="40px">
-											<button label="+" width="30px" onClick="@command('addSample')" />
+											<button label="+" width="30px" onClick="@command('addSample', condition=condition.condition)" />
 										</column>
 										<column label="Samples" />
 									</columns>
@@ -52,33 +57,30 @@
 									<rows>
 										<template name="model" var="sample">
 											<row>
+												<textbox inplace="true" hflex="true" value="@bind(sample.sample.name)" />
 												<detail open="false" fulfill="onOpen">
-													<grid id="replicateGrid" width="100%" model="@load(vm.replicates)">
-
+													<grid hflex="true" model="@load(sample)">
 														<columns>
 															<column width="40px">
-																<button label="+" width="30px"
-																	onClick="@command('addReplicate')" />
+																<button label="+" width="30px" onClick="@command('addReplicate', sample=sample.sample)" />
 															</column>
 															<column label="Replicates" />
 														</columns>
 
 														<rows>
 															<template name="model" var="replicate">
-																<row>
-																	<label value="@bind(replicate.name)" />
+																<row spans="2">
+																	<textbox inplace="true" hflex="true" value="@bind(replicate.name)" />
 																</row>
 															</template>
 														</rows>
 													</grid>
 												</detail>
-												<label value="@bind(sample.name)" />
 											</row>
 										</template>
 									</rows>
 								</grid>
 							</detail>
-							<label value="@bind(condition.name)" />
 						</row>
 					</template>
 				</rows>
@@ -86,6 +88,7 @@
 
 			<button label="Save" onClick="@command('save')" />
 			<button label="Reset" onClick="@command('reset')" />
+			<button label="Cancel" onClick="@command('cancel')" />
 		</vlayout>
 	</window>
 </zk>

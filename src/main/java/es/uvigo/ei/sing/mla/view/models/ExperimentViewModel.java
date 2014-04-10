@@ -1,9 +1,9 @@
 package es.uvigo.ei.sing.mla.view.models;
 
-import java.util.List;
-
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -15,29 +15,14 @@ import es.uvigo.ei.sing.mla.model.entities.Experiment;
 import es.uvigo.ei.sing.mla.model.entities.Replicate;
 import es.uvigo.ei.sing.mla.model.entities.Sample;
 import es.uvigo.ei.sing.mla.model.entities.User;
-import es.uvigo.ei.sing.mla.services.ConditionGroupService;
 import es.uvigo.ei.sing.mla.services.ExperimentService;
-import es.uvigo.ei.sing.mla.services.ReplicateService;
-import es.uvigo.ei.sing.mla.services.SampleService;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class ExperimentViewModel {
 	@WireVariable
 	private ExperimentService experimentService;
 
-	@WireVariable
-	private ConditionGroupService conditionGroupService;
-
-	@WireVariable
-	private SampleService sampleService;
-
-	@WireVariable
-	private ReplicateService replicateService;
-
 	private Experiment experiment;
-	private ConditionGroup condition;
-	private Sample sample;
-	private Replicate replicate;
 
 	@Init
 	public void init() {
@@ -54,9 +39,16 @@ public class ExperimentViewModel {
 			this.experiment = experimentService.get(id);
 		} else {
 			this.experiment = new Experiment();
-			this.experiment.setUser((User) Sessions.getCurrent().getAttribute(
-					"user"));
+			this.experiment.setUser((User) Sessions.getCurrent().getAttribute("user"));
 		}
+	}
+	
+	public ExperimentListModel getModel() {
+		return new ExperimentListModel(this.experiment);
+	}
+
+	public Experiment getExperiment() {
+		return experiment;
 	}
 
 	@Command
@@ -66,78 +58,50 @@ public class ExperimentViewModel {
 		} else {
 			experimentService.update(experiment);
 		}
+		Executions.sendRedirect("home.zul");
 	}
 
 	@Command
+	@NotifyChange({ "model", "experiment" })
 	public void reset() {
-		// if (experiment.getId() == null) {
-		// this.experiment = new Experiment();
-		// } else {
-		// this.experiment = experimentService.get(this.experiment.getId());
-		// }
+		 if (experiment.getId() == null) {
+			 this.experiment = new Experiment();
+		 } else {
+			 this.experiment = experimentService.reload(this.experiment);
+		 }
 	}
-
-	public Experiment getExperiment() {
-		return experiment;
-	}
-
-	public ConditionGroup getCondition() {
-		return condition;
-	}
-
-	public Sample getSample() {
-		return sample;
-	}
-
-	public Replicate getReplicate() {
-		return replicate;
-	}
-
-	public List<ConditionGroup> getConditions() {
-		return this.conditionGroupService.list(this.getExperiment());
-	}
-
-	public List<Sample> getSamples() {
-		return this.sampleService.list(this.getCondition());
-	}
-
-	public List<Replicate> getReplicates() {
-		return this.replicateService.list(this.getSample());
+	
+	@Command
+	public void cancel() {
+		this.experimentService.reload(this.experiment);
+		Executions.sendRedirect("home.zul");
 	}
 
 	@Command
 	public void addCondition() {
-		ConditionGroup condition = new ConditionGroup();
+		final ConditionGroup condition = new ConditionGroup();
+		condition.setName("Condition" + (this.experiment.getConditions().size() + 1));
 
-		condition.setName("Condition"
-				+ Integer.toString(this.getConditions().size() + 1));
-
-		condition.setExperiment(this.experiment);
-
-		this.conditionGroupService.add(condition);
+		this.experiment.addCondition(condition);
 	}
 
 	@Command
-	public void addSample() {
-		Sample sample = new Sample();
+	public void addSample(
+		@BindingParam("condition") ConditionGroup condition
+	) {
+		final Sample sample = new Sample();
+		sample.setName("Sample" + (condition.getSamples().size() + 1));
 
-		sample.setName("Sample"
-				+ Integer.toString(this.getSamples().size() + 1));
-
-		sample.setCondition(this.condition);
-
-		this.sampleService.add(sample);
+		condition.addSample(sample);
 	}
 
 	@Command
-	public void addReplicate() {
-		Replicate replicate = new Replicate();
+	public void addReplicate(
+		@BindingParam("sample") Sample sample
+	) {
+		final Replicate replicate = new Replicate();
+		replicate.setName("Replicate" + (sample.getReplicates().size() + 1));
 
-		replicate.setName("Replicate"
-				+ Integer.toString(this.getReplicates().size() + 1));
-
-		replicate.setSample(this.sample);
-
-		this.replicateService.add(replicate);
+		sample.addReplicate(replicate);
 	}
 }
