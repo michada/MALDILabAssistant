@@ -1,20 +1,24 @@
 <zk>
-	<window  apply="org.zkoss.bind.BindComposer"
-		title="Sign in" width="220px" border="normal"
-		viewModel="@id('user') @init('es.uvigo.ei.sing.mla.view.models.UserViewModel')">
-		<vlayout>
-			<label value="Username" />
-			<textbox value="@bind(user.signInUsername)" hflex="true" />
-
-			<label value="Password" />
-			<textbox type="password" value="@bind(user.signInPassword)"
-				hflex="true" />
-
-			<button label="Sign in" onClick="@command('signIn')" />
-
-			<hlayout>
-				<a label="Sign up" href="signUp.zul" />
-			</hlayout>
-		</vlayout>
-	</window>
+	<div width="960px" style="margin: 0 auto;">
+		<hbox hflex="true" height="400px" align="center" pack="center">
+			<window apply="org.zkoss.bind.BindComposer"
+				title="Sign in" width="220px" border="normal"
+				viewModel="@id('user') @init('es.uvigo.ei.sing.mla.view.models.UserViewModel')">
+				<vlayout>
+					<label value="Username" />
+					<textbox value="@bind(user.signInUsername)" hflex="true" />
+		
+					<label value="Password" />
+					<textbox type="password" value="@bind(user.signInPassword)"
+						hflex="true" />
+		
+					<button label="Sign in" onClick="@command('signIn')" />
+		
+					<hlayout>
+						<a label="Sign up" href="signUp.zul" />
+					</hlayout>
+				</vlayout>
+			</window>
+		</hbox>
+	</div>
 </zk>

@@ -1,5 +1,7 @@
 package es.uvigo.ei.sing.mla.view.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,10 +16,13 @@ public class ExperimentListModel extends AbstractListModel<ConditionListModel> i
 	private static final long serialVersionUID = 1L;
 	
 	private final Experiment experiment;
+	private List<ConditionGroup> conditions;
 	
 	public ExperimentListModel(Experiment experiment) {
 		this.experiment = experiment;
 		this.experiment.addObserver(this);
+		
+		this.conditions = new ArrayList<>(this.experiment.getConditions());
 	}
 	
 	public Experiment getExperiment() {
@@ -47,8 +52,12 @@ public class ExperimentListModel extends AbstractListModel<ConditionListModel> i
 					this.fireEvent(ListDataEvent.INTERVAL_ADDED, index, index);
 				} else {
 					// Condition was removed
-					this.fireEvent(ListDataEvent.CONTENTS_CHANGED, -1, -1);
+					final int index = this.conditions.indexOf(condition);
+					
+					this.fireEvent(ListDataEvent.INTERVAL_REMOVED, index, index);
 				}
+				
+				this.conditions = new ArrayList<>(this.experiment.getConditions());
 			} catch (Exception e) {
 				// List model is not associated with any desktop
 				o.deleteObserver(this);

@@ -4,33 +4,38 @@
 		viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')"
 		onClose="@command('cancelChanges')">
 		<vlayout>
-			<label value="Name" />
-			<textbox value="@bind(vm.experiment.name)" hflex="true" />
-
-			<label value="Description" />
-			<textbox value="@bind(vm.experiment.description)" hflex="true" />
-
-			<hlayout hflex="true">
+			<hlayout>
+				<label value="Name" />
+				<textbox value="@bind(vm.experiment.name)" hflex="true" />
+				
 				<label value="Start Date" />
-				<datebox value="@bind(vm.experiment.startDate)"/>
+				<datebox value="@bind(vm.experiment.startDate)" />
 	
 				<label value="End Date" />
-				<datebox value="@bind(vm.experiment.endDate)"/>
+				<datebox value="@bind(vm.experiment.endDate)" />
 			</hlayout>
+			
+			<label value="Description" />
+			<textbox value="@bind(vm.experiment.description)" hflex="true" rows="4"/>
 
 			<hlayout hflex="true">
-				<label value="Number of rows" />
-				<intbox value="@bind(vm.experiment.numRows)"/>
+				<label value="Each plate has " />
+				<intbox value="@bind(vm.experiment.numRows)" cols="3" style="text-align: right"/>
+				<combobox model="@load(vm.cellNameTypes)" selectedItem="@bind(vm.experiment.rowNameType)">
+					<template name="model">
+						<comboitem label="@load(each)" />
+					</template>
+				</combobox>
+				<label value="rows and " />
 	
-				<label value="Number of columns" />
-				<intbox value="@bind(vm.experiment.numCols)"/>
+				<intbox value="@bind(vm.experiment.numCols)" cols="3" style="text-align: right"/>
+				<combobox model="@load(vm.cellNameTypes)" selectedItem="@bind(vm.experiment.colNameType)">
+					<template name="model">
+						<comboitem label="@load(each)" />
+					</template>
+				</combobox>
+				<label value="columns" />
 			</hlayout>
-
-			<label value="Type of row" />
-			<textbox value="@bind(vm.experiment.rowNameType)" hflex="true" />
-
-			<label value="Type of column" />
-			<textbox value="@bind(vm.experiment.colNameType)" hflex="true" />
 
 			<grid width="100%" model="@load(vm.model)">
 				<columns>
@@ -86,9 +91,11 @@
 				</rows>
 			</grid>
 
-			<button label="Save" onClick="@command('save')" />
-			<button label="Reset" onClick="@command('reset')" />
-			<button label="Cancel" onClick="@command('cancel')" />
+			<hbox pack="end" hflex="true">
+				<button label="Save" onClick="@command('save')" />
+				<button label="Reset" onClick="@command('reset')" />
+				<button label="Cancel" onClick="@command('cancel')" />
+			</hbox>
 		</vlayout>
 	</window>
 </zk>

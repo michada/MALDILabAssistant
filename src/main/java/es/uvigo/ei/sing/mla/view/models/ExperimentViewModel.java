@@ -16,6 +16,7 @@ import es.uvigo.ei.sing.mla.model.entities.Replicate;
 import es.uvigo.ei.sing.mla.model.entities.Sample;
 import es.uvigo.ei.sing.mla.model.entities.User;
 import es.uvigo.ei.sing.mla.services.ExperimentService;
+import es.uvigo.ei.sing.mla.util.CellNameType;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class ExperimentViewModel {
@@ -49,6 +50,10 @@ public class ExperimentViewModel {
 
 	public Experiment getExperiment() {
 		return experiment;
+	}
+	
+	public CellNameType[] getCellNameTypes() {
+		return CellNameType.values();
 	}
 
 	@Command
