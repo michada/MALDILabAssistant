@@ -30,6 +30,9 @@ public class ConditionGroup extends Observable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "condition", cascade = CascadeType.ALL)
 	private List<Sample> samples;
 
+	@Column(length = 10)
+	private String color;
+
 	public ConditionGroup() {
 		this.name = "";
 		this.experiment = null;
@@ -65,9 +68,17 @@ public class ConditionGroup extends Observable {
 			this.experiment._addCondition(this);
 		}
 	}
-	
+
 	public List<Sample> getSamples() {
 		return Collections.unmodifiableList(this.samples);
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public boolean addSample(Sample sample) {
@@ -96,14 +107,14 @@ public class ConditionGroup extends Observable {
 
 	void _addSample(Sample sample) {
 		this.samples.add(sample);
-		
+
 		this.setChanged();
 		this.notifyObservers(sample);
 	}
 
 	void _removeSample(Sample sample) {
 		this.samples.remove(sample);
-		
+
 		this.setChanged();
 		this.notifyObservers(sample);
 	}

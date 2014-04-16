@@ -32,6 +32,9 @@ public class Sample extends Observable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sample", cascade = CascadeType.ALL)
 	private List<Replicate> replicates;
 
+	@Column(length = 10)
+	private String color;
+
 	public Sample() {
 		this.name = "";
 		this.condition = null;
@@ -74,6 +77,14 @@ public class Sample extends Observable {
 		return Collections.unmodifiableList(this.replicates);
 	}
 
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	public boolean addReplicate(Replicate replicate) {
 		Objects.requireNonNull(replicate, "replicate can't be null");
 
@@ -100,14 +111,14 @@ public class Sample extends Observable {
 
 	void _addReplicate(Replicate replicate) {
 		this.replicates.add(replicate);
-		
+
 		this.setChanged();
 		this.notifyObservers(replicate);
 	}
 
 	void _removeReplicate(Replicate replicate) {
 		this.replicates.remove(replicate);
-		
+
 		this.setChanged();
 		this.notifyObservers(replicate);
 	}
