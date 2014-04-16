@@ -1,30 +1,35 @@
 <zk>
 	<div width="960px" style="margin: 0 auto;">
-		<window apply="org.zkoss.bind.BindComposer" title="Experiments"
-			width="600px" border="normal"
-			viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.HomeViewModel')">
-	
-			<grid id="box" width="100%" model="@load(vm.experiments)"
-				autopaging="true">
-				
-				<columns>
-					<column label="Name" />
-					<column label="Description" />
-					<column label="" />
-				</columns>
-	
-				<rows>
-					<template name="model" var="experiment">
-						<row>
-							<label value="@load(experiment.name)" />
-							<label value="@load(experiment.description)" />
-							<button label="Open"
-								onClick="@command('edit', experiment=experiment)" />
-						</row>
-					</template>
-				</rows>
-			</grid>
-			<button label="New Experiment" onClick="@command('add')" />
-		</window>
+		<hbox hflex="true" height="540px" align="center"
+			pack="center">
+			<window apply="org.zkoss.bind.BindComposer"
+				title="Experiments" width="720px" border="normal"
+				viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.HomeViewModel')">
+
+				<grid id="box" width="100%"
+					model="@load(vm.experiments)" autopaging="true">
+
+					<columns>
+						<column label="Name" />
+						<column label="Description" />
+						<column label="" />
+					</columns>
+
+					<rows>
+						<template name="model" var="experiment">
+							<row>
+								<label value="@load(experiment.name)" />
+								<label
+									value="@load(experiment.description)" />
+								<button label="Open"
+									onClick="@command('edit', experiment=experiment)" />
+							</row>
+						</template>
+					</rows>
+				</grid>
+				<button label="New Experiment"
+					onClick="@command('add')" />
+			</window>
+		</hbox>
 	</div>
 </zk>

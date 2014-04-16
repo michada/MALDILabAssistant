@@ -1,19 +1,28 @@
 <zk>
-	<window apply="org.zkoss.bind.BindComposer"
-		title="Sign up" width="220px" border="normal"
-		viewModel="@id('user') @init('es.uvigo.ei.sing.mla.view.models.UserViewModel')">
-		<vlayout>
-			<label value="Username" />
-			<textbox value="@bind(user.signUpUsername)" hflex="true" />
+	<div width="960px" style="margin: 0 auto;">
+		<hbox hflex="true" height="540px" align="center"
+			pack="center">
+			<window apply="org.zkoss.bind.BindComposer" title="Sign up"
+				width="240px" border="normal"
+				viewModel="@id('user') @init('es.uvigo.ei.sing.mla.view.models.UserViewModel')">
 
-			<label value="Password" />
-			<textbox type="password" value="@bind(user.signUpPassword)" hflex="true" />
+				<vlayout>
+					<label value="Username" />
+					<textbox value="@bind(user.signUpUsername)"
+						hflex="true" />
 
-			<button label="Sign up" onClick="@command('signUp')" />
+					<label value="Password" />
+					<textbox type="password"
+						value="@bind(user.signUpPassword)" hflex="true" />
 
-			<hlayout>
-				<a label="Sign in" href="index.zul" />
-			</hlayout>
-		</vlayout>
-	</window>
+					<button label="Sign up"
+						onClick="@command('signUp')" />
+
+					<hlayout>
+						<a label="Sign in" href="index.zul" />
+					</hlayout>
+				</vlayout>
+			</window>
+		</hbox>
+	</div>
 </zk>
