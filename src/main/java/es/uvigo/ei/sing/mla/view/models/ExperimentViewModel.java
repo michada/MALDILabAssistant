@@ -40,10 +40,11 @@ public class ExperimentViewModel {
 			this.experiment = experimentService.get(id);
 		} else {
 			this.experiment = new Experiment();
-			this.experiment.setUser((User) Sessions.getCurrent().getAttribute("user"));
+			this.experiment.setUser((User) Sessions.getCurrent().getAttribute(
+					"user"));
 		}
 	}
-	
+
 	public ExperimentListModel getModel() {
 		return new ExperimentListModel(this.experiment);
 	}
@@ -51,9 +52,19 @@ public class ExperimentViewModel {
 	public Experiment getExperiment() {
 		return experiment;
 	}
-	
+
 	public CellNameType[] getCellNameTypes() {
 		return CellNameType.values();
+	}
+
+	@Command
+	public void toTab0() {
+		if (experiment.getId() == null) {
+			Executions.getCurrent().sendRedirect("experimentData.zul");
+		} else {
+			Executions.getCurrent().sendRedirect(
+					"experimentData.zul?id=" + experiment.getId());
+		}
 	}
 
 	@Command
@@ -69,31 +80,33 @@ public class ExperimentViewModel {
 	@Command
 	@NotifyChange({ "model", "experiment" })
 	public void reset() {
-		 if (experiment.getId() == null) {
-			 this.experiment = new Experiment();
-		 } else {
-			 this.experiment = experimentService.reload(this.experiment);
-		 }
+		if (experiment.getId() == null) {
+			this.experiment = new Experiment();
+		} else {
+			this.experiment = experimentService.reload(this.experiment);
+		}
 	}
-	
+
 	@Command
 	public void cancel() {
-		this.experimentService.reload(this.experiment);
+		if (experiment.getId() != null) {
+			this.experimentService.reload(this.experiment);
+		}
+
 		Executions.sendRedirect("home.zul");
 	}
 
 	@Command
 	public void addCondition() {
 		final ConditionGroup condition = new ConditionGroup();
-		condition.setName("Condition" + (this.experiment.getConditions().size() + 1));
+		condition.setName("Condition"
+				+ (this.experiment.getConditions().size() + 1));
 
 		this.experiment.addCondition(condition);
 	}
 
 	@Command
-	public void addSample(
-		@BindingParam("condition") ConditionGroup condition
-	) {
+	public void addSample(@BindingParam("condition") ConditionGroup condition) {
 		final Sample sample = new Sample();
 		sample.setName("Sample" + (condition.getSamples().size() + 1));
 
@@ -101,9 +114,7 @@ public class ExperimentViewModel {
 	}
 
 	@Command
-	public void addReplicate(
-		@BindingParam("sample") Sample sample
-	) {
+	public void addReplicate(@BindingParam("sample") Sample sample) {
 		final Replicate replicate = new Replicate();
 		replicate.setName("Replicate" + (sample.getReplicates().size() + 1));
 

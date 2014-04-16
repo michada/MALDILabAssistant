@@ -41,6 +41,13 @@ public class HomeViewModel {
 	}
 
 	@Command
+	public void delete(@BindingParam("experiment") Experiment experiment) {
+		this.experimentService.delete(experiment);
+
+		Executions.getCurrent().sendRedirect("home.zul");
+	}
+
+	@Command
 	public void add() {
 		Executions.getCurrent().sendRedirect("experimentData.zul");
 	}

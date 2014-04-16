@@ -5,7 +5,12 @@
 			<hlayout>
 				<window apply="org.zkoss.bind.BindComposer" title="Tabs"
 					width="240px" border="normal"
-					viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.HomeViewModel')">
+					viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')">
+
+					<vlayout>
+						<button label="Experiment Data"
+							onClick="@command('toTab0')" />
+					</vlayout>
 				</window>
 				<window apply="org.zkoss.bind.BindComposer"
 					title="Experiment Data" width="720px" border="normal"
