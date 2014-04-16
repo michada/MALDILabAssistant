@@ -25,7 +25,8 @@
 									var="condition">
 									<row>
 										<hlayout>
-											<colorbox />
+											<colorbox
+												value="@bind(condition.condition.color)" />
 											<label hflex="true"
 												value="@load(condition.condition.name)" />
 										</hlayout>
@@ -44,7 +45,8 @@
 														name="model" var="sample">
 														<row>
 															<hlayout>
-																<colorbox />
+																<colorbox
+																	value="@bind(sample.sample.color)" />
 																<label
 																	hflex="true" value="@load(sample.sample.name)" />
 															</hlayout>
@@ -61,7 +63,8 @@
 																			name="model" var="replicate">
 																			<row>
 																				<hlayout>
-																					<colorbox />
+																					<colorbox
+																						value="@bind(replicate.color)" />
 																					<label
 																						hflex="true" value="@load(replicate.name)" />
 																				</hlayout>
