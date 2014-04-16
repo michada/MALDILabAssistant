@@ -68,6 +68,16 @@ public class ExperimentViewModel {
 	}
 
 	@Command
+	public void toTab1() {
+		if (experiment.getId() == null) {
+			Executions.getCurrent().sendRedirect("experimentDesign.zul");
+		} else {
+			Executions.getCurrent().sendRedirect(
+					"experimentDesign.zul?id=" + experiment.getId());
+		}
+	}
+
+	@Command
 	public void save() {
 		if (experiment.getId() == null) {
 			this.experiment = this.experimentService.add(this.experiment);

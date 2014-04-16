@@ -1,0 +1,88 @@
+<zk>
+	<div width="960px" style="margin: 0 auto;">
+		<vlayout apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('es.uvigo.ei.sing.mla.view.models.ExperimentViewModel')">
+			<window title="Tabs" width="960px" border="normal">
+				<hlayout>
+					<button label="Experiment Data"
+						onClick="@command('toTab0')" />
+					<button label="Experiment Design"
+						onClick="@command('toTab1')" />
+				</hlayout>
+			</window>
+			<hlayout>
+				<window title="Experiment Data" width="960px"
+					border="normal" onClose="@command('cancel')">
+
+					<hlayout>
+						<grid width="240px" model="@load(vm.model)">
+							<columns>
+								<column width="40px" />
+								<column label="Conditions" />
+							</columns>
+							<rows>
+								<template name="model"
+									var="condition">
+									<row>
+										<hlayout>
+											<colorbox />
+											<label hflex="true"
+												value="@load(condition.condition.name)" />
+										</hlayout>
+										<detail open="false"
+											fulfill="onOpen">
+											<grid hflex="true"
+												model="@load(condition)">
+												<columns>
+													<column
+														width="40px" />
+													<column
+														label="Samples" />
+												</columns>
+												<rows>
+													<template
+														name="model" var="sample">
+														<row>
+															<hlayout>
+																<colorbox />
+																<label
+																	hflex="true" value="@load(sample.sample.name)" />
+															</hlayout>
+															<detail
+																open="false" fulfill="onOpen">
+																<grid
+																	hflex="true" model="@load(sample)">
+																	<columns>
+																		<column
+																			label="Replicates" />
+																	</columns>
+																	<rows>
+																		<template
+																			name="model" var="replicate">
+																			<row>
+																				<hlayout>
+																					<colorbox />
+																					<label
+																						hflex="true" value="@load(replicate.name)" />
+																				</hlayout>
+																			</row>
+																		</template>
+																	</rows>
+																</grid>
+															</detail>
+														</row>
+													</template>
+												</rows>
+											</grid>
+										</detail>
+									</row>
+								</template>
+							</rows>
+						</grid>
+						<label width="720px" value="SS" />
+					</hlayout>
+				</window>
+			</hlayout>
+		</vlayout>
+	</div>
+</zk>
